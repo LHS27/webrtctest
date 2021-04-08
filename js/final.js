@@ -103,6 +103,10 @@ var button = document.querySelector('#button');
 if (button) {
 button.addEventListener('click', updateBtn);
 }
+var bouton = doucment.querySelector('#bouton');
+if (bouton) {
+	bouton.addEventListener('click', updateBouton);
+}
 
 var constraints = {
       audio: true,
@@ -113,6 +117,13 @@ function updateBtn() {
   if (button.value === 'Stopper webcam') {
     document.getElementById("button").addEventListener("click", function(event) {
 	pc.removeStream(localStream);
+}, false);
+}
+}
+function updateBoutontn() {
+  if (bouton.value === 'Start webcam') {
+    document.getElementById("bouton").addEventListener("click", function(event) {
+	pc.geStream(localStream);
 }, false);
 }
 }
