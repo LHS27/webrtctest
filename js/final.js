@@ -116,15 +116,18 @@ var constraints = {
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
     document.getElementById("button").addEventListener("click", function(event) {
-	pc.removeStream(localStream);
-}, false);
+	navigator.mediaDevices.getUserMedia({
+		audio: true,
+		video: false} 
 }
 }
 function updateBoutontn() {
   if (bouton.value === 'Start webcam') {
     document.getElementById("bouton").addEventListener("click", function(event) {
-	pc.gotStream(localStream);
-}, false);
+	navigator.mediaDevices.getUserMedia({
+		audio: true,
+		video: {facingMode : 'environment'} 
+  })
 }
 }
 
