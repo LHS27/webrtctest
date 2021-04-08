@@ -123,7 +123,7 @@ function updateBtn() {
 function updateBoutontn() {
   if (bouton.value === 'Start webcam') {
     document.getElementById("bouton").addEventListener("click", function(event) {
-	pc.geStream(localStream);
+	pc.gotStream(localStream);
 }, false);
 }
 }
