@@ -103,7 +103,7 @@ var button = document.querySelector('#button');
 if (button) {
 button.addEventListener('click', updateBtn);
 }
-var bouton = doucment.querySelector('#bouton');
+var bouton = document.querySelector('#bouton');
 if (bouton) {
 	bouton.addEventListener('click', updateBouton);
 }
