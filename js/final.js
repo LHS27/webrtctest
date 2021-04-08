@@ -123,8 +123,8 @@ function updateBtn() {
 function updateBouton() {
   if (bouton.value === 'Start webcam') {
     document.getElementById("bouton").addEventListener("click", function(event) {
-	pc.gotStream(localStream);
-}, false);
+	pc.navigator.mediaDevices.getUserMedia();
+}, true);
 }
 }
 
