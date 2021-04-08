@@ -1,0 +1,14 @@
+
+body {
+  font-family: sans-serif;
+}
+
+.remote {
+    width: 65%;
+    height: 65%;
+     }
+
+.local {
+	width: 20%;
+    height: 20%;
+}
