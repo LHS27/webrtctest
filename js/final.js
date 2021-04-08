@@ -98,15 +98,14 @@ socket.on('message', function(message) {
 ////////////////////////////////////////////////////
 var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
-
-var button = document.querySelector('#button');
-if (button) {
+var bouton = doucment.querySelector('#bouton');
+var btn = document.querySelector('#button');
+if (btn) {
+button.addEventListener('click', updateBtn);
+} else if (bouton) {
 button.addEventListener('click', updateBtn);
 }
-var bouton = doucment.querySelector('#bouton');
-if (bouton) {
-	bouton.addEventListener('click', updateBouton);
-}
+
 
 var constraints = {
       audio: true,
@@ -116,18 +115,17 @@ var constraints = {
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
     document.getElementById("button").addEventListener("click", function(event) {
-	navigator.mediaDevices.getUserMedia({
-		audio: true,
-		video: false} 
+	pc.removeStream(localStream);f (button.value === 'Start webcam') {
+    
+}, false);
+ else if (button.value === 'Start webcam') { document.getElementById("bouton").addEventListener("click", function(event) {
+	pc.gotS(localStream);
 }
 }
+
 function updateBoutontn() {
-  if (bouton.value === 'Start webcam') {
-    document.getElementById("bouton").addEventListener("click", function(event) {
-	navigator.mediaDevices.getUserMedia({
-		audio: true,
-		video: {facingMode : 'environment'} 
-  })
+  i
+}, false);
 }
 }
 
