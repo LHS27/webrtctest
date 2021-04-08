@@ -115,26 +115,24 @@ var constraints = {
 	  
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
-    document.getElementById("button").addEventListener("click",StopCam) 
-	}
-
-}
-function StopCam(){
+    document.getElementById("button").addEventListener("click", function() {
 	navigator.mediaDevices.getUserMedia({
 		audio: true,
 		video: false 
-	})
+	});
+	});
+	}
 }
+
 function updateBouton() {
   if (bouton.value === 'Start webcam') {
-    document.getElementById("bouton").addEventListener("click", StartCam) 
-  }
-}
-function StartCam() {
+    document.getElementById("bouton").addEventListener("click", function() {
 	navigator.mediaDevices.getUserMedia({
 		audio: true,
 		video: {facingMode : 'environment'} 
-	})
+	});
+	});		
+  }
 }
 
 
