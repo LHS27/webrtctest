@@ -5,12 +5,10 @@ var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
 
-var PORT = process.env.PORT || 8080;
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
   fileServer.serve(req, res);
-}).listen(PORT);
-
+}).listen(8080);
 
 var io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
@@ -39,17 +37,17 @@ io.sockets.on('connection', function(socket) {
       socket.join(room);
       log('Client ID ' + socket.id + ' created room ' + room);
       socket.emit('created', room, socket.id);
-    } else if (numClients === 1 ) {
+    } else if (numClients === 1) {
       log('Client ID ' + socket.id + ' joined room ' + room);
-      io.sockets.in(room).emit('join', room);
+      // io.sockets.in(room).emit('join', room);
       socket.join(room);
       socket.emit('joined', room, socket.id);
-      io.sockets.in(room).emit('ready');
+      io.sockets.in(room).emit('ready', room);
+      socket.broadcast.emit('ready', room);
     } else { // max two clients
       socket.emit('full', room);
     }
   });
-
 
   socket.on('ipaddr', function() {
     var ifaces = os.networkInterfaces();
@@ -62,8 +60,12 @@ io.sockets.on('connection', function(socket) {
     }
   });
 
-  socket.on('bye', function(){
-    console.log('received bye');
+  socket.on('disconnect', function(reason) {
+    console.log(`Peer or server disconnected. Reason: ${reason}.`);
+    socket.broadcast.emit('bye');
   });
 
+  socket.on('bye', function(room) {
+    console.log(`Peer said bye on room ${room}.`);
+  });
 });
