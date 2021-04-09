@@ -120,6 +120,7 @@ function updateBtn() {
 		audio: true,
 		video: false 
 	});
+	console.log('stop')
 	});
 	}
 }
@@ -131,6 +132,7 @@ function updateBouton() {
 		audio: true,
 		video: {facingMode : 'environment'} 
 	});
+	console.log('go')
 	});		
   }
 }
