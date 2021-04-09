@@ -52,6 +52,8 @@ var sdpConstraints = {
 /////////////////////////////////////////////
 
 var room = prompt('Enter room name:');
+var roommdp = '';
+var mdp = prompt('Enter the password of this room');
 
 var socket = io.connect();
 
@@ -60,6 +62,7 @@ var socket = io.connect();
 
 socket.on('created', function(room) {
 	console.log('Created room ' + room),
+	mdp=roommdp;
 	isInitiator = true
 })
 
@@ -70,6 +73,9 @@ socket.on('full', function(room) {
 
 socket.on('join', function (room){
   console.log('Another peer made a request to join room ' + room),
+  while (mdp =! roommdp) { 
+  var mdp = prompt('Enter the password of this room');
+  }
   console.log('This peer is the initiator of room ' + room + '!'),
   isChannelReady = true
 })
