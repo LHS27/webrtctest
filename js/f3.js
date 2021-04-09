@@ -116,7 +116,7 @@ var constraints = {
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
     document.getElementById("button").addEventListener("click", function(event) {
-		
+		pc.removeStream(localVideo)
 	console.log('stop');
 }, false);
 }
@@ -125,7 +125,7 @@ function updateBtn() {
 function updateBouton() {
   if (button.value === 'Start webcam') {
     document.getElementById("bouton").addEventListener("click", function(event) {
-	pc.addStream(localStream);
+	pc.addStream(localVideo);
 	console.log('go');
 }, false);
 }
@@ -139,7 +139,7 @@ navigator.mediaDevices.getUserMedia({
 
 .then(gotStream)
 .catch(function(e) {
-//  alert('getUserMedia() error: ' + e.name);
+	alert('getUserMedia() error: ' + e.name);
 });
 
 function gotStream(stream) {
