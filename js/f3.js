@@ -24,10 +24,24 @@ var pcConfig = {
    }
   ]
 };
+  var audiosetup;
+  if (confirm("OK = true , Annuler  = false")) {
+    audiosetup = true;
+  } else {
+    audiosetup = false;
+  }
+  var videosetup;
+  if (confirm("OK = true , Annuler  = false")) {
+    videosetup = true;
+  } else {
+    videosetup = false;
+  }
+  
+
 // Set up audio and video regardless of what devices are present.
 var sdpConstraints = {
-  offerToReceiveAudio: true,
-  offerToReceiveVideo: true
+  offerToReceiveAudio: audiosetup,
+  offerToReceiveVideo: videosetup
 };
 
 /////////////////////////////////////////////
