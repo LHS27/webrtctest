@@ -34,7 +34,8 @@ var pcConfig = {
 
   var videosetup;
   if (confirm("OK = true , Annuler  = false")) {
-    videosetup = true;
+    videosetup = {facingMode : 'environment'} 
+	  };
   } else {
     videosetup = false;
   }
@@ -127,9 +128,8 @@ if (bouton) {
 }
 
 var constraints = {
-      audio: true,
-      video: {facingMode : 'environment'} 
-	  }
+      audio: audiosetup,
+      video: videosetup
 	  
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
@@ -151,9 +151,9 @@ function updateBouton() {
 
 
 navigator.mediaDevices.getUserMedia({
-  audio: true,
-  video: {facingMode : 'environment'} 
-  })
+	audio: audiosetup,
+	video: videosetup
+})
 
 .then(gotStream)
 .catch(function(e) {
