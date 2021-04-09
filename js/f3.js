@@ -30,7 +30,7 @@ var pcConfig = {
   } else {
     audiosetup = false;
   }
-    document.getElementById("demo").innerHTML = txt;
+    document.getElementById("demo").innerHTML = audiosetup;
 
   var videosetup;
   if (confirm("OK = true , Annuler  = false")) {
@@ -38,7 +38,7 @@ var pcConfig = {
   } else {
     videosetup = false;
   }
-  document.getElementById("demo2").innerHTML = txt2;
+  document.getElementById("demo2").innerHTML = videosetup;
 
   
 
