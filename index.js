@@ -38,11 +38,11 @@ io.sockets.on('connection', function(socket) {
     if (numClients === 0) {
       socket.join(room,roommdp);
       log('Client ID ' + socket.id + ' created room ' + room);
-      socket.emit('created', room, roommdp, socket.id);
+      socket.emit('created', room, socket.id);
     } else if (numClients === 1 ) {
       log('Client ID ' + socket.id + ' joined room ' + room);
       io.sockets.in(room).emit('join', room);
-      socket.join(room, mdp, roommdp);
+      socket.join(room);
       socket.emit('joined', room, socket.id);
       io.sockets.in(room).emit('ready');
     } else { // max two clients
