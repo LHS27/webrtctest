@@ -116,7 +116,7 @@ var constraints = {
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
     document.getElementById("button").addEventListener("click", function(event) {
-	pc.removeStream(localStream);
+		
 	console.log('stop');
 }, false);
 }
@@ -139,7 +139,7 @@ navigator.mediaDevices.getUserMedia({
 
 .then(gotStream)
 .catch(function(e) {
-  alert('getUserMedia() error: ' + e.name);
+//  alert('getUserMedia() error: ' + e.name);
 });
 
 function gotStream(stream) {
