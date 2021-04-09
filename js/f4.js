@@ -35,7 +35,7 @@ var pcConfig = {
   var videosetup;
   if (confirm("OK = true , Annuler  = false")) {
     videosetup = {facingMode : 'environment'} 
-	  };
+	  ;
   } else {
     videosetup = false;
   }
