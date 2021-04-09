@@ -51,7 +51,7 @@ var sdpConstraints = {
 
 /////////////////////////////////////////////
 
-var room = 'foo';
+var room = prompt('Enter room name:');
 
 var socket = io.connect();
 
@@ -130,6 +130,7 @@ if (bouton) {
 var constraints = {
       audio: audiosetup,
       video: videosetup
+}
 	  
 function updateBtn() {
   if (button.value === 'Stopper webcam') {
