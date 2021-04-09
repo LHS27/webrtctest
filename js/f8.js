@@ -60,9 +60,9 @@ var socket = io.connect();
   socket.emit('create or join', room);
   console.log('Attempted to create or  join room', room);
 
-socket.on('created', function(room) {
+socket.on('created', function(room, roommdp) {
 	console.log('Created room ' + room),
-	mdp=roommdp;
+	roommdp=mdp;
 	isInitiator = true
 })
 
@@ -71,10 +71,10 @@ socket.on('full', function(room) {
   hangup();
 })
 
-socket.on('join', function (room){
+socket.on('join', function (room, mdp, roommdp){
   console.log('Another peer made a request to join room ' + room),
 	while (mdp != roommdp) { 
-		var mdp = prompt('Enter the password of this room');
+		mdp = prompt('Enter the password of this room');
 	}
   console.log('This peer is the initiator of room ' + room + '!'),
   isChannelReady = true
