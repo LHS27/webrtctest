@@ -1,37 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-
-  <title>Realtime communication with WebRTC</title>
-
-  <link rel="stylesheet" href="/css/main.css" />
+  <title>WebRTC HBInfo</title>
+  <link rel="stylesheet" href="/css/final.css" />
 
 </head>
 
 <body>
 
-  <h1>Realtime communication with WebRTC</h1>
+  <h1>WebRTC HBInfo</h1>
 
-  <div id="videoCanvas">
-    <video id="camera" autoplay playsinline></video>
-    <canvas id="photo"></canvas>
+  <div>
+	<video class=remote id="remoteVideo"  autoplay playsinline></video>
+	<video class=local id="localVideo"  autoplay muted playsinline></video>
+
   </div>
-
-  <div id="buttons">
-    <button id="snap">Snap</button><span> then </span><button id="send">Send</button>
-    <span> or </span>
-    <button id="snapAndSend">Snap &amp; Send</button>
-  </div>
-
-  <div id="incoming">
-    <h2>Incoming photos</h2>
-    <div id="trail"></div>
-  </div>
-
+  <input type="button" id="button" value="Stopper webcam">
+  <input type="button" id="bouton" value="Start webcam">
+  <!-- This file is automatically added/served when running "node index.js". -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/f3.js"></script>
 
 </body>
 
