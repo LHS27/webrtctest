@@ -53,7 +53,7 @@ var sdpConstraints = {
 
 var room = prompt('Enter room name:');
 var roommdp = '';
-var mdp = prompt('Enter the password of this room');
+//var mdp = prompt('Enter the password of this room');
 
 var socket = io.connect();
 
