@@ -30,12 +30,16 @@ var pcConfig = {
   } else {
     audiosetup = false;
   }
+    document.getElementById("demo").innerHTML = txt;
+
   var videosetup;
   if (confirm("OK = true , Annuler  = false")) {
     videosetup = true;
   } else {
     videosetup = false;
   }
+  document.getElementById("demo2").innerHTML = txt2;
+
   
 
 // Set up audio and video regardless of what devices are present.
