@@ -73,7 +73,7 @@ socket.on('full', function(room) {
 
 socket.on('join', function (room, mdp, roommdp){
   console.log('Another peer made a request to join room ' + room),
-	while (mdp != roommdp) { 
+	if (mdp != roommdp) { 
 		mdp = prompt('Enter the password of this room');
 	}
   console.log('This peer is the initiator of room ' + room + '!'),
