@@ -300,7 +300,7 @@ function handleRemoteStreamAdded(event) {
 	console.log('Remote stream added.');
     remoteStream = event.stream;
     remoteVideo.srcObject = remoteStream;
-*/}
+}*/
 
 function handleRemoteStreamRemoved(event) {
   console.log('Remote stream removed. Event: ', event);
