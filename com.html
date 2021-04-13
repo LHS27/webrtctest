@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>WebRTC HBInfo</title>
+  <link rel="stylesheet" href="/css/final.css" />
+
+</head>
+
+<body>
+
+  <h1>WebRTC HBInfo</h1>
+
+  <div>
+	<video class=remote id="remoteVideo"  autoplay playsinline></video>
+	<video class=local id="localVideo"  autoplay muted playsinline></video>
+
+  </div>
+  <p id="demo"></p>
+<p id="demo2"></p>
+  <!-- This file is automatically added/served when running "node index.js". -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="js/c5.js"></script>
+
+</body>
+
+</html>
