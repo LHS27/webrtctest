@@ -52,7 +52,7 @@ var sdpConstraints = {
 /////////////////////////////////////////////
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-var room = (urlParams.get('room');
+var room = (urlParams.get('room')
 //var roommdp = '';
 //var mdp = prompt('Enter the password of this room');
 

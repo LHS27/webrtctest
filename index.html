@@ -32,12 +32,23 @@
                 margin: 0 auto;
             }
         </style>
-        
-        <script src="js/config.js"></script>
     </head>
     
     
     <body>
+<script>
+    function process()
+    {
+        var url = "https://webrtchbtest.herokuapp.com/" + document.getElementById("url").value;
+        location.href = url;
+        return false;
+    }
+</script>
+
+<form onSubmit="return process();">
+    URL: <input type="text" name="url" id="url">
+    <input type="submit" value="go">
+</form>
         <input type="button" id='createRoom' class="button" value="Create Room">
         
         <div id="roomLink" style="margin-top: 10px; text-align: center"></div>
