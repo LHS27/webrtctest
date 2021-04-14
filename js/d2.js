@@ -54,17 +54,16 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 var room = (urlParams.get('room'));
 console.log(room)
-//var roommdp = '';
-//var mdp = prompt('Enter the password of this room');
+
 
 var socket = io.connect();
 
   socket.emit('create or join', room);
   console.log('Attempted to create or  join room', room);
 
-socket.on('created', function(room, roommdp) {
+
+socket.on('created', function(room) {
 	console.log('Created room ' + room),
-//	roommdp=mdp;
 	isInitiator = true
 })
 
@@ -115,7 +114,7 @@ socket.on('message', function(message) {
     })
     pc.addIceCandidate(candidate);
   } else if (message === 'bye' && isStarted) {
-    hangup();
+   // hangup();
   }
 })
 
@@ -129,9 +128,6 @@ var constraints = {
       video: videosetup
 }
 	  
-
-
-
 navigator.mediaDevices.getUserMedia({
 	audio: audiosetup,
 	video: videosetup
@@ -174,7 +170,7 @@ function maybeStart() {
   console.log('>>>>>>> maybeStart() ', isStarted, localStream, isChannelReady);
   if (!isStarted && typeof localStream !== 'undefined' && isChannelReady) {
     console.log('>>>>>> creating peer connection');
-    createPeerConnection();
+    new createPeerConnection();
     pc.addStream(localStream);
     isStarted = true;
     console.log('isInitiator', isInitiator);
@@ -201,6 +197,7 @@ function createPeerConnection() {
     pc.onaddstream = handleRemoteStreamAdded;
     pc.onremovestream = handleRemoteStreamRemoved;
     console.log('Created RTCPeerConnnection');
+	alert('peerconnection');
   } catch (e) {
     console.log('Failed to create PeerConnection, exception: ' + e.message);
     alert('Cannot create RTCPeerConnection object.');
@@ -260,7 +257,6 @@ function requestTurn(turnURL) {
   }
   if (!turnExists) {
     console.log('Getting TURN server from ', turnURL);
-    // No TURN server. Get one from :
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -298,12 +294,12 @@ function handleRemoteStreamRemoved(event) {
   console.log('Remote stream removed. Event: ', event);
 }
 
-function hangup() {
-  console.log('Hanging up.');
+//function hangup() {
+ // console.log('Hanging up.');
+  //stop();
+ // sendMessage('bye');
   
-  sendMessage('bye');
-  
-}
+//
 
 function stop() {	
   isStarted = false;
