@@ -50,11 +50,12 @@ var sdpConstraints = {
 };
 
 /////////////////////////////////////////////
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+/*const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);			Systeme de plusieurs salles
 var room = (urlParams.get('room'));
-console.log(room)
+console.log(room)*/
 
+var room = 'default';
 
 var socket = io.connect();
 
