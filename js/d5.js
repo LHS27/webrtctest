@@ -242,7 +242,7 @@ function setLocalAndSendMessage(sessionDescription) {
 }
 
 function onCreateSessionDescriptionError(error) {
-  trace('Failed to create session description: ' + error.toString());
+  console.log('Failed to create session description: ' + error.toString());
 }
 
 function requestTurn(turnURL) {
