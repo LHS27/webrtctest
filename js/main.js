@@ -30,7 +30,6 @@ var pcConfig = {
   } else {
     audiosetup = false;
   }
-    document.getElementById("demo").innerHTML = audiosetup;
 
   var videosetup;
   if (confirm("Voulez-vous transmettre de la vidéo ? ( OK = Oui, Annuler = Non")) {
@@ -39,7 +38,6 @@ var pcConfig = {
   } else {
     videosetup = false;
   }
-  document.getElementById("demo2").innerHTML = videosetup;
 
   
 
