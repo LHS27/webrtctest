@@ -1,0 +1,16 @@
+
+body {
+  font-family: sans-serif;
+}
+
+#remote-video {
+    width: 65%;
+    height: 65%;
+     }
+#video-chat-container {
+        width: 100%;
+      }
+#local-video {
+	width: 20%;
+    height: 20%;
+}

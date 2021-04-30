@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>WebRTC HBInfo</title>
+  <link rel="stylesheet" href="/final.css" />
+
+</head>
+
+<body>
+	<div id="room-selection-container" class="centered">
+      <h1>Vidéo Conférence H&B </h1>
+      <label>Entrez le numéro de la salle</label>
+      <input id="room-input" type="text" />
+      <button id="connect-button">Se connecter</button>
+    </div>
+
+    <div id="video-chat-container">
+      <video id="local-video" autoplay="autoplay" muted="muted"></video>
+      <video id="remote-video" autoplay="autoplay"></video>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
