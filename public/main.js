@@ -1,4 +1,3 @@
-// DOM elements.
 const roomSelectionContainer = document.getElementById('room-selection-container')
 const roomInput = document.getElementById('room-input')
 const connectButton = document.getElementById('connect-button')
@@ -11,15 +10,15 @@ const remoteVideoComponent = document.getElementById('remote-video')
 const socket = io()
 const mediaConstraints = {
   audio: true,
-  video: { width: 1280, height: 720 },
+  video: {facingMode : 'environment'} , //Si sur telephone, recupere camera de derriere
 }
 let localStream
 let remoteStream
 let isRoomCreator
-let rtcPeerConnection // Connection between the local device and the remote peer.
+let rtcPeerConnection 
 let roomId
 
-// Free public STUN servers provided by Google.
+// Serveurs STUN public de Google
 const iceServers = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
@@ -30,12 +29,12 @@ const iceServers = {
   ],
 }
 
-// BUTTON LISTENER ============================================================
+// Recupere la valeur donnee et l'attribue a l'id de la salle
 connectButton.addEventListener('click', () => {
   joinRoom(roomInput.value)
 })
 
-// SOCKET EVENT CALLBACKS =====================================================
+// Evenements socket
 socket.on('room_created', async () => {
   console.log('Socket event callback: room_created')
 
@@ -53,12 +52,12 @@ socket.on('room_joined', async () => {
 socket.on('full_room', () => {
   console.log('Socket event callback: full_room')
 
-  alert('The room is full, please try another one')
+  alert('Cette salle est complete, choisissez-en une autre (rafraichissez la page)')
 })
 
 socket.on('start_call', async () => {
   console.log('Socket event callback: start_call')
-
+//Le createur de la salle cree l'appel automatiquement
   if (isRoomCreator) {
     rtcPeerConnection = new RTCPeerConnection(iceServers)
     addLocalTracks(rtcPeerConnection)
@@ -70,7 +69,7 @@ socket.on('start_call', async () => {
 
 socket.on('webrtc_offer', async (event) => {
   console.log('Socket event callback: webrtc_offer')
-
+//Le participant cree une reponse a l'offre (l'appel) du createur de la salle
   if (!isRoomCreator) {
     rtcPeerConnection = new RTCPeerConnection(iceServers)
     addLocalTracks(rtcPeerConnection)
@@ -89,8 +88,7 @@ socket.on('webrtc_answer', (event) => {
 
 socket.on('webrtc_ice_candidate', (event) => {
   console.log('Socket event callback: webrtc_ice_candidate')
-
-  // ICE candidate configuration.
+  // Configuration des candidats ICE
   var candidate = new RTCIceCandidate({
     sdpMLineIndex: event.label,
     candidate: event.candidate,
@@ -98,10 +96,10 @@ socket.on('webrtc_ice_candidate', (event) => {
   rtcPeerConnection.addIceCandidate(candidate)
 })
 
-// FUNCTIONS ==================================================================
+// Fonction pour rejoindre une salle
 function joinRoom(room) {
   if (room === '') {
-    alert('Please type a room ID')
+    alert('Entrez un numéro de salle pour pouvoir continuer')
   } else {
     roomId = room
     socket.emit('join', room)
@@ -113,25 +111,25 @@ function showVideoConference() {
   roomSelectionContainer.style = 'display: none'
   videoChatContainer.style = 'display: block'
 }
-
+//Definit les medias locaux (audio/video)
 async function setLocalStream(mediaConstraints) {
   let stream
   try {
     stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
   } catch (error) {
-    console.error('Could not get user media', error)
+    console.error("Impossible de recuperer votre audio et/ou votre video", error)
   }
 
   localStream = stream
   localVideoComponent.srcObject = stream
 }
-
+//Ajoute kes medias locaux a la connexion RTC
 function addLocalTracks(rtcPeerConnection) {
   localStream.getTracks().forEach((track) => {
     rtcPeerConnection.addTrack(track, localStream)
   })
 }
-
+//fonction permettant la creation de l'appel (offre)
 async function createOffer(rtcPeerConnection) {
   let sessionDescription
   try {
@@ -147,7 +145,7 @@ async function createOffer(rtcPeerConnection) {
     roomId,
   })
 }
-
+//fonction permettant la creation de la reponse
 async function createAnswer(rtcPeerConnection) {
   let sessionDescription
   try {
@@ -163,7 +161,7 @@ async function createAnswer(rtcPeerConnection) {
     roomId,
   })
 }
-
+//Definit les medias (audio/video) recuperes de l'autre utilisateur
 function setRemoteStream(event) {
   remoteVideoComponent.srcObject = event.streams[0]
   remoteStream = event.stream

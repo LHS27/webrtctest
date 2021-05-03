@@ -10,7 +10,7 @@ io.on('connection', (socket) => {
     const roomClients = io.sockets.adapter.rooms[roomId] || { length: 0 }
     const numberOfClients = roomClients.length
 
-    // These events are emitted only to the sender socket.
+
     if (numberOfClients == 0) {
       console.log(`Creating room ${roomId} and emitting room_created socket event`)
       socket.join(roomId)
@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
     }
   })
 
-  // These events are emitted to all the sockets connected to the same room except the sender.
+  // Ces evenements sont envoyes a tous les participants de la salle sauf a celui qui envoie ces evenements
   socket.on('start_call', (roomId) => {
     console.log(`Broadcasting start_call event to peers in room ${roomId}`)
     socket.broadcast.to(roomId).emit('start_call')
@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
   })
 })
 
-// START THE SERVER =================================================================
+// Lancement du serveur 
 const port = process.env.PORT || 3000
 server.listen(port, () => {
   console.log(`Express server listening on port ${port}`)
