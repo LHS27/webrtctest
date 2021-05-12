@@ -1,10 +1,14 @@
 const roomSelectionContainer = document.getElementById('room-selection-container')
 const roomInput = document.getElementById('room-input')
+
 const connectButton = document.getElementById('connect-button')
 
 const videoChatContainer = document.getElementById('video-chat-container')
 const localVideoComponent = document.getElementById('local-video')
 const remoteVideoComponent = document.getElementById('remote-video')
+
+
+
 
 // Variables.
 const socket = io()
@@ -16,7 +20,8 @@ let localStream
 let remoteStream
 let isRoomCreator
 let rtcPeerConnection 
-let roomId
+
+
 
 // Serveurs STUN public de Google
 const iceServers = {
@@ -28,16 +33,20 @@ const iceServers = {
     { urls: 'stun:stun4.l.google.com:19302' },
   ],
 }
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var roomId = (urlParams.get('room'));
+console.log(roomId)
+joinRoom(roomId)
 
 // Recupere la valeur donnee et l'attribue a l'id de la salle
-connectButton.addEventListener('click', () => {
+/*connectButton.addEventListener('click', () => {
   joinRoom(roomInput.value)
-})
+})*/
 
 // Evenements socket
 socket.on('room_created', async () => {
   console.log('Socket event callback: room_created')
-
   await setLocalStream(mediaConstraints)
   isRoomCreator = true
 })
@@ -101,14 +110,16 @@ function joinRoom(room) {
   if (room === '') {
     alert('Entrez un numéro de salle pour pouvoir continuer')
   } else {
-    roomId = room
+	   roomId = room
     socket.emit('join', room)
-    showVideoConference()
+	  showVideoConference()
+
+	}
   }
-}
+
+
 
 function showVideoConference() {
-  roomSelectionContainer.style = 'display: none'
   videoChatContainer.style = 'display: block'
 }
 //Definit les medias locaux (audio/video)

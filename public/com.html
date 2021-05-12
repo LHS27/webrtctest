@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>WebRTC HBInfo</title>
+  <link rel="stylesheet" href="/final.css" />
+
+</head>
+
+<body>
+  <h1>WebRTC HBInfo</h1>
+
+	<div id="video-chat-container">
+      <video id="local-video" autoplay="autoplay" muted="muted"></video>
+      <video id="remote-video" autoplay="autoplay"></video>
+	  <div id="link"/>
+    </div>
+<script>
+var link = document.querySelector("#link");
+var urlcourante = document.location.href; 
+link.innerHTML = '<a href="'+urlcourante+'">'+urlcourante+'</a>';
+</script>
+	
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+
+</body>
+
+</html>
