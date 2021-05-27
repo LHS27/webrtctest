@@ -5,18 +5,46 @@
   <title>WebRTC HBInfo</title>
   <link rel="stylesheet" href="/final.css" />
 </head>
+
 <body>
-	<div id="room-selection-container" class="centered">
-      <h1>Vidéo Conférence H&B </h1>
-      <label>Entrez le numéro de la salle</label>
-      <input id="room-input" type="text"/>
+	<script>
+		function process()
+		{
+			var url = "/com.html?room=" + document.getElementById("url").value;
+			location.href = url;
+			return false;
+		}
+	</script>
+
+	<form onSubmit="return process();">
+		URL: <input type="text" name="url" id="url"/>
+		<input type="submit" value="Entrer"/>
+	</form>
+	<input type="button" id='createRoom' class="button" value="Creer">
+	<div id="roomLink" style="margin-top: 10px; text-align: center"></div>
+
+        <script>
+            var createBtn = document.querySelector("#createRoom");
+            var linkInput = document.querySelector("#roomLink");
+            createBtn.onclick = function(){
+                new Promise(function(resolve, reject){
+                    var room = Math.random().toString(36).slice(2).substring(0, 15);
+
+                    return room ? resolve(room) : reject(new Error("Could not create room"));
+                }).then(function(room){
+                    var roomLink ="com.html?room="+room;
+					document.location.href = roomLink
+                }).catch(function(err){
+                    linkInput.innerHTML = err;
+                });
+            };
+        </script>
 
       <button id="connect-button">Se connecter</button>
     </div>
-    <div id="video-chat-container">
-      <video id="local-video" autoplay="autoplay" muted="muted"></video>
-      <video id="remote-video" autoplay="autoplay"></video>
-    </div>
+  
+
+
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>

@@ -7,33 +7,43 @@ const videoChatContainer = document.getElementById('video-chat-container')
 const localVideoComponent = document.getElementById('local-video')
 const remoteVideoComponent = document.getElementById('remote-video')
 
+  
+// Variables.
+const socket = io()
+let localStream
+let remoteStream
+let isRoomCreator
+let rtcPeerConnection 
+let audiosetup
+let videosetup
 
-  var audiosetup;
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var roomId = (urlParams.get('room'));
+if (roomId != null) {
+	
+  
   if (confirm("Voulez-vous transmettre de l'audio ? ( OK = Oui, Annuler = Non")) {
     audiosetup = true;
   } else {
     audiosetup = false;
   }
 
-  var videosetup;
+  
   if (confirm("Voulez-vous transmettre de la vidéo ? ( OK = Oui, Annuler = Non")) {
     videosetup = {facingMode : 'environment'} 
 	  ;
   } else {
     videosetup = false;
   }
-  
-// Variables.
-const socket = io()
+}
 const mediaConstraints = {
   audio: audiosetup,
   video: videosetup , //Si sur telephone, recupere camera de derriere
 }
-let localStream
-let remoteStream
-let isRoomCreator
-let rtcPeerConnection 
-let roomId
+
+console.log(roomId)
+joinRoom(roomId)
 
 
 
@@ -49,9 +59,9 @@ const iceServers = {
 }
 
 // Recupere la valeur donnee et l'attribue a l'id de la salle
-connectButton.addEventListener('click', () => {
+/*connectButton.addEventListener('click', () => {
   joinRoom(roomInput.value)
-})
+})*/
 
 // Evenements socket
 socket.on('room_created', async () => {
@@ -129,7 +139,6 @@ function joinRoom(room) {
 
 
 function showVideoConference() {
-  roomSelectionContainer.style = 'display: none'
   videoChatContainer.style = 'display: block'
 }
 //Definit les medias locaux (audio/video)
